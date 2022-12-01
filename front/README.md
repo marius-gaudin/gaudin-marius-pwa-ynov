@@ -1,6 +1,6 @@
-#  app.todo (front)
+# app.todo.com (front)
 
-A Quasar Project
+A simple todo list
 
 ## Install the dependencies
 ```bash
