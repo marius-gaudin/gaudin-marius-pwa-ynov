@@ -1,11 +1,12 @@
 import Router from '@koa/router'
-import * as listControllers from '#components/list/list-controllers.js'
-const tasks = new Router()
+import * as ListControllers from '#components/list/list-controllers.js'
 
-tasks.get('/', listControllers.index)
-tasks.get('/:id', listControllers.id)
-tasks.post('/', listControllers.create)
-tasks.put('/:id', listControllers.update)
-tasks.del('/:id', listControllers.del)
+const lists = new Router()
 
-export default tasks
+lists.get('/', ListControllers.index)
+lists.get('/:id', ListControllers.id)
+lists.post('/', ListControllers.create)
+lists.put('/:id', ListControllers.update)
+lists.del('/:id', ListControllers.del)
+
+export default lists

@@ -1,5 +1,7 @@
 <template>
   <div class="q-pa-xl">
+    <Counter :count="10" @incremented="dumb" />
+    {{tasksReactive}}
     <h1>Page tutoriel VUE3</h1>
     <h2>Data & computed</h2>
     <h2>{{ message }}</h2>
@@ -38,9 +40,12 @@
 </template>
 <script setup>
 // Syntax vue3 Composition API
+import Counter from 'components/exemple/AppCounter.vue'
 import { ref, computed } from 'vue'
+import { getAllTasks } from 'services/tasks'
 
 const visible = ref(false)
+const tasksReactive = ref([])
 const message = ref('Hello')
 const name = ref('Unknown')
 const checked = ref(false)
@@ -49,9 +54,18 @@ const tasks = ref([
   { title: 'Task 1' },
   { title: 'Task 2' },
   { title: 'Task 3' }
-])
+]);
+
+(async () => {
+  const { data } = await getAllTasks()
+  tasksReactive.value = data
+})()
 
 const messageReverse = computed(() => message.value.split('').reverse().join(''))
+function dumb (v) {
+  message.value = `Counter incremented ${v}`
+  console.log('Incremented')
+}
 
 function f () {
   message.value = 'Test'

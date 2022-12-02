@@ -1,1 +1,51 @@
 // app global css in SCSS form
+
+h1, h2, h3, p {
+    color: $dark;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 2rem 0;
+    line-height: normal;
+}
+
+h2, h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0;
+    line-height: normal;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+.main {
+    padding: 1.5rem;
+
+    .card {
+        .card-section {
+            &.top {
+                background-color: $secondary;
+            }
+
+            .voir-list {
+                width: 100%;
+                background-color: transparent;
+                border: none;
+                padding: 5px;
+                padding-top: 10px;
+                font-weight: 600;
+            }
+
+            padding: .6rem 1rem;
+        }
+        margin-bottom: 2rem;
+        &:last-child {
+            margin-bottom: 5rem;
+        }
+    }
+
+}
