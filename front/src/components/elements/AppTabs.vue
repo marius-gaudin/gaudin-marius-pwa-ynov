@@ -1,21 +1,24 @@
 <template>
+    <AddList v-if="showAddList" v-model="showAddList" />
     <div class="tabs">
         <div class="q-gutter-y-md shadow-2">
             <q-tabs
-                v-model="tab"
                 narrow-indicator
                 dense
                 align="justify"
                 class="text-grey"
             >
-                <q-tab :ripple="false" name="" icon="sort" />
-                <q-tab :ripple="false" name="add" icon="add" class="add" />
-                <q-tab :ripple="false" name="" icon="person" />
+                <q-tab :ripple="false" name="list" icon="sort" />
+                <q-tab :ripple="false" name="add" icon="add" class="add" @click="(showAddList = true)" />
+                <q-tab :ripple="false" name="person" icon="person" />
             </q-tabs>
         </div>
     </div>
 </template>
-<script>
+<script setup>
+import { ref } from 'vue'
+import AddList from 'src/components/lists/AppAddList.vue'
+const showAddList = ref(false)
 </script>
 <style scoped>
     :deep() .add {
@@ -32,6 +35,10 @@
 
     :deep() .q-icon {
         font-size: 1.8rem;
+    }
+
+    :deep() .q-tab__indicator {
+        z-index: -1;
     }
     .tabs {
         background-color: white;

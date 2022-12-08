@@ -1,32 +1,31 @@
 <template>
-    <div class="modal" :style="`left: ${props.show ? '0':'-100%'}`">
-        <div class="row items-center">
-            <q-btn unelevated class="btn-back" color="grey-3" text-color="dark" icon="navigate_before" @click="close" />
-            <h2>{{props.title}}</h2>
-            <div class="end">
-              <slot name="header"></slot>
-            </div>
-        </div>
-        <slot></slot>
+  <q-dialog :maximized="true" position="left">
+    <div class="modal">
+      <div class="row items-center">
+        <q-btn unelevated class="btn-back" color="grey-3" text-color="dark" icon="navigate_before" v-close-popup />
+          <h2>{{title}}</h2>
+          <div class="end">
+            <slot name="header"></slot>
+          </div>
+      </div>
+      <slot></slot>
     </div>
+  </q-dialog>
 </template>
 <script setup>
+import { ref, watch } from 'vue'
 const props = defineProps({
-  show: {
-    type: Boolean,
-    default: false
-  },
   title: {
     type: String,
     default: ''
   }
 })
+const title = ref(props.title)
 
-const emit = defineEmits(['show'])
+watch(() => props.title, (value, oldValue) => {
+  title.value = value
+})
 
-function close () {
-  emit('show', false)
-}
 </script>
 <style scoped>
   .end {
@@ -34,13 +33,8 @@ function close () {
   }
   .modal {
       padding: 1.5rem;
-      position: fixed;
-      top: 0;
       background-color: white;
       width: 100vw;
-      height: 100vh;
-      z-index: 2;
-      transition: left .5s;
   }
   .btn-back {
       width: 1rem;
