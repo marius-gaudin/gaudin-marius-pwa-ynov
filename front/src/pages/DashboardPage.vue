@@ -29,8 +29,7 @@
   <ListOptions v-model="showListOptions" :idList="listSelected" @edit="(showEditList = true)" />
 
   <EditList v-if="showEditList" v-model="showEditList" :list="listSelected" />
-
-  <Tabs />
+  <Tabs @openList="openList($event)" />
 </template>
 <script setup>
 import { ref, watch } from 'vue'

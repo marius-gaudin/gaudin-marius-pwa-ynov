@@ -1,5 +1,8 @@
 <template>
     <AddList v-if="showAddList" v-model="showAddList" />
+    <q-dialog :maximized="true" v-model="showMenu" position="left">
+        <Menu @openList="openList($event)"  @openAddList="(showAddList = true)"/>
+    </q-dialog>
     <div class="tabs">
         <div class="q-gutter-y-md shadow-2">
             <q-tabs
@@ -8,7 +11,7 @@
                 align="justify"
                 class="text-grey"
             >
-                <q-tab :ripple="false" name="list" icon="sort" />
+                <q-tab :ripple="false" name="list" icon="sort" @click="(showMenu = true)" />
                 <q-tab :ripple="false" name="add" icon="add" class="add" @click="(showAddList = true)" />
                 <q-tab :ripple="false" name="person" icon="person" />
             </q-tabs>
@@ -18,7 +21,13 @@
 <script setup>
 import { ref } from 'vue'
 import AddList from 'src/components/lists/AppAddList.vue'
+import Menu from 'src/components/elements/AppMenu.vue'
+const emit = defineEmits(['openList'])
 const showAddList = ref(false)
+const showMenu = ref(false)
+const openList = (id) => {
+  emit('openList', id)
+}
 </script>
 <style scoped>
     :deep() .add {
@@ -43,7 +52,7 @@ const showAddList = ref(false)
     .tabs {
         background-color: white;
         position: fixed;
-        bottom: 0;
+        bottom: -1px;
         left: 0;
         width: 100vw;
         z-index: 1;

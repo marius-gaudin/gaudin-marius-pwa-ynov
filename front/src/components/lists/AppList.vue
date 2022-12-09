@@ -6,14 +6,14 @@
 
     <h3 :set="tasksNotCompleted = tasksStore.getCompletedTasksList(false, props.listSelected)">Tasks - {{tasksNotCompleted?.length}}</h3>
     <div class="column">
-      <q-btn @click="openTask(task)" class="items-start text-capitalize" unelevated color="grey-3" text-color="dark" v-for="(task, index) in tasksNotCompleted" :key="index" >
+      <q-btn no-caps @click="openTask(task)" class="items-start" unelevated color="grey-3" text-color="dark" v-for="(task, index) in tasksNotCompleted" :key="index" >
         <q-checkbox v-model="task.done" />{{task.title}}
       </q-btn>
     </div>
 
     <h3 :set="tasksCompleted = tasksStore.getCompletedTasksList(true, props.listSelected)">Tasks Completed - {{tasksCompleted?.length}}</h3>
     <div class="column">
-      <q-btn @click="openTask(task)" class="items-start text-capitalize" unelevated color="grey-3" text-color="dark" v-for="(task, index) in tasksCompleted" :key="index" >
+      <q-btn no-caps @click="openTask(task)" class="items-start" unelevated color="grey-3" text-color="dark" v-for="(task, index) in tasksCompleted" :key="index" >
         <q-checkbox v-model="task.done" />{{task.title}}
       </q-btn>
     </div>
