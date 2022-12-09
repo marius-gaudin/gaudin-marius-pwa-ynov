@@ -3,7 +3,10 @@
         <q-card>
             <h2>Créer une nouvelle liste</h2>
             <q-input outlined v-model="title" label="list name" />
-            <q-btn @click="createList" color="primary" label="Créer" :disabled="(title.length < 1)" />
+            <div class="row justify-between q-gutter-sm">
+              <q-btn label="Annuler" v-close-popup/>
+              <q-btn @click="createList" color="primary" label="Créer" :disabled="(title.length < 1)" />
+            </div>
         </q-card>
     </q-dialog>
 </template>

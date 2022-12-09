@@ -15,6 +15,10 @@
         </q-dialog>
 
         <Edit :task="props.task" v-model="showEdit" />
+
+        <q-dialog v-model="showSelectList">
+          <SelectList :task="props.task" />
+        </q-dialog>
     </Modal>
 </template>
 <script setup>
@@ -22,6 +26,7 @@ import { ref } from 'vue'
 import Modal from 'src/components/elements/AppModal.vue'
 import Options from 'src/components/elements/AppOptions.vue'
 import Edit from 'src/components/tasks/AppEditTask.vue'
+import SelectList from 'src/components/tasks/AppSelectList.vue'
 import { useTasksStore } from 'stores/tasks-store'
 
 const props = defineProps({
@@ -32,6 +37,7 @@ const props = defineProps({
 })
 const showOptions = ref(false)
 const showEdit = ref(false)
+const showSelectList = ref(false)
 const tasksStore = useTasksStore()
 const emit = defineEmits(['update:modelValue'])
 
@@ -44,10 +50,26 @@ const remove = async () => {
   close()
 }
 
+const moveTask = () => {
+  showSelectList.value = true
+}
+
 const options = [
   { label: 'Editer', action: edit },
-  { label: 'Déplacer la tâche', action: null },
-  { label: 'Supprimer', action: remove, color: 'negative' }
+  { label: 'Déplacer la tâche', action: moveTask },
+  {
+    label: 'Supprimer',
+    action: remove,
+    color: 'negative',
+    confirmation: {
+      title: 'Supprimer la tâche',
+      description: 'Vous êtes sur le point de supprimer votre tâche êtes vous sûr de vouloir faire ça ?',
+      button: {
+        label: 'Supprimer',
+        color: 'negative'
+      }
+    }
+  }
 ]
 
 const close = () => {

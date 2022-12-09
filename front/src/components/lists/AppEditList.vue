@@ -3,7 +3,10 @@
         <q-card>
             <h2>Modifier une liste</h2>
             <q-input outlined v-model="newList.title" label="list name" />
-            <q-btn @click="update" color="primary" label="Modifier" :disabled="(newList.title.length < 1)" />
+            <div class="row justify-between q-gutter-sm">
+              <q-btn label="Annuler" v-close-popup/>
+              <q-btn @click="update" color="primary" label="Modifier" :disabled="(newList.title.length < 1)" />
+            </div>
         </q-card>
     </q-dialog>
 </template>

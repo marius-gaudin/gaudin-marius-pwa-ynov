@@ -27,7 +27,19 @@ const edit = () => {
 
 const options = [
   { label: 'Editer', action: edit },
-  { label: 'Supprimer', action: remove, color: 'negative' }
+  {
+    label: 'Supprimer',
+    action: remove,
+    color: 'negative',
+    confirmation: {
+      title: 'Supprimer la liste',
+      description: 'Vous êtes sur le point de supprimer votre liste êtes vous sûr de vouloir faire ça ?',
+      button: {
+        label: 'Supprimer',
+        color: 'negative'
+      }
+    }
+  }
 ]
 
 </script>
